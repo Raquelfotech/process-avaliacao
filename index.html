@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portal de Filmes</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #0f0f0f;
+      color: #ffffff;
+      text-align: center;
+    }
+
+    header {
+      background-color: #111;
+      padding: 10px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    }
+
+    h1 {
+      margin: 10px 0;
+      font-size: 26px;
+    }
+
+    .banner {
+      margin-top: 15px;
+      max-width: 90%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    p.bem-vindo {
+      font-size: 20px;
+      margin: 20px auto;
+      max-width: 700px;
+    }
+
+    .btn-assistir {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 15px 25px;
+      font-size: 18px;
+      background-color: #e50914;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 10px;
+      transition: background-color 0.3s;
+    }
+
+    .btn-assistir:hover {
+      background-color: #c40812;
+    }
+
+    .votacao {
+      margin-top: 40px;
+      padding: 20px;
+      background: #1f1f1f;
+      border-radius: 15px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .votacao h2 {
+      font-size: 20px;
+    }
+
+    .botoes button {
+      margin: 10px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .otimo { background-color: #27ae60; color: white; }
+    .bom { background-color: #f39c12; color: white; }
+    .regular { background-color: #c0392b; color: white; }
+
+    .barra {
+      margin-top: 10px;
+      height: 24px;
+      width: 100%;
+      background-color: #333;
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .progresso {
+      height: 100%;
+      text-align: center;
+      color: white;
+      line-height: 24px;
+    }
+
+    .otimo-barra { background: linear-gradient(to right, #2ecc71, #27ae60); }
+    .bom-barra { background: linear-gradient(to right, #f1c40f, #f39c12); }
+    .regular-barra { background: linear-gradient(to right, #e74c3c, #c0392b); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🎬 Sessão de Cinema</h1>
+  </header>
+
+  <!-- Banners decorativos -->
+  <img src="imagens/banner1.jpg" alt="Banner 1" class="banner" />
+  <img src="imagens/banner2.jpg" alt="Banner 2" class="banner" />
+  <img src="imagens/banner3.jpg" alt="Banner 3" class="banner" />
+  <img src="imagens/banner4.jpg" alt="Banner 4" class="banner" />
+
+  <div class="container">
+    <p class="bem-vindo">
+      Bem-vindo à nossa sessão de cinema! Aqui você encontra diversão, acolhimento e momentos especiais. Clique no botão abaixo para acessar uma seleção gratuita de filmes.
+    </p>
+
+    <a class="btn-assistir" href="https://pluto.tv" target="_blank">🎥 Assistir Agora</a>
+
+    <div class="votacao">
+      <h2>Como você avalia essa sessão?</h2>
+      <div class="botoes">
+        <button class="otimo" onclick="votar('otimo')">Ótimo</button>
+        <button class="bom" onclick="votar('bom')">Bom</button>
+        <button class="regular" onclick="votar('regular')">Regular</button>
+      </div>
+
+      <div class="barra">
+        <div id="barra-otimo" class="progresso otimo-barra" style="width: 80%">80%</div>
+      </div>
+      <div class="barra">
+        <div id="barra-bom" class="progresso bom-barra" style="width: 15%">15%</div>
+      </div>
+      <div class="barra">
+        <div id="barra-regular" class="progresso regular-barra" style="width: 5%">5%</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let votos = { otimo: 8, bom: 1.5, regular: 0.5 };
+
+    function votar(tipo) {
+      votos[tipo]++;
+      atualizarBarras();
+    }
+
+    function atualizarBarras() {
+      let total = votos.otimo + votos.bom + votos.regular;
+
+      let pOtimo = Math.round((votos.otimo / total) * 100);
+      let pBom = Math.round((votos.bom / total) * 100);
+      let pRegular = Math.round((votos.regular / total) * 100);
+
+      document.getElementById("barra-otimo").style.width = pOtimo + "%";
+      document.getElementById("barra-otimo").textContent = pOtimo + "%";
+
+      document.getElementById("barra-bom").style.width = pBom + "%";
+      document.getElementById("barra-bom").textContent = pBom + "%";
+
+      document.getElementById("barra-regular").style.width = pRegular + "%";
+      document.getElementById("barra-regular").textContent = pRegular + "%";
+    }
+  </script>
+</body>
+</html>
